@@ -2,19 +2,22 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.llms import Ollama
+from langsmith import Client
 import streamlit as st
 import os 
-from dotenv import load_dotenv
+from dotenv import load_dotenv,find_dotenv
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
 # os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")
 # LangSmith
 
-os.environ['LANGCHAIN_ENDPOINT'] =os.getenv("LANGCHAIN_ENDPOINT")
+os.environ['LANGCHAIN_ENDPOINT'] ="https://api.smith.langchain.com"
 os.environ['LANGCHAIN_TRAICING_V2'] = "true"
-os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
-os.environ['LANGCHAIN_PROJECT'] = os.getenv("LANGCHAIN_PROJECT")
+os.environ['LANGCHAIN_API_KEY'] = str(os.getenv("LANGCHAIN_API_KEY"))
+os.environ['LANGCHAIN_PROJECT'] = "pt-respectful-wasabi-44"
+
+client = Client()
 
 prompt = ChatPromptTemplate.from_messages(
     [

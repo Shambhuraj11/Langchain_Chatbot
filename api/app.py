@@ -2,16 +2,18 @@ from fastapi import FastAPI
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.llms import Ollama
 from langserve import add_routes
+from langsmith import Client
 import uvicorn
 from dotenv import load_dotenv
 import os 
 load_dotenv()
 
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
-os.environ['LANGCHAIN_TRAICING_V2']= os.getenv("LANGCHAIN_TRAICING_V2")
+os.environ['LANGCHAIN_TRAICING_V2']= "true"
 os.environ['LANGCHAIN_ENDPOINT'] = "https://api.smith.langchain.com"
-os.environ['LANGCHAIN_PROJECT'] = os.getenv("LANGCHAIN_PROJECT")
+os.environ['LANGCHAIN_PROJECT'] = "pt-respectful-wasabi-44"
 
+client = Client()
 app = FastAPI(
     title= "Lanchain Server",
     version="1.0",
