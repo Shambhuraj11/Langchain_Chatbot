@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from langchain.prompts import ChatPromptTemplate
-from langchain_community.llms import Ollama
+from langchain_community.llms import Ollama,OllamaEmbeddings
 from langserve import add_routes
 from langsmith import Client
 import uvicorn
@@ -21,7 +21,6 @@ app = FastAPI(
 )
 
 model = Ollama(model='llama3')
-
 prompt1 = ChatPromptTemplate.from_template(
     "Write me sentences about {topic} in 3 lines"
 )
